@@ -25,6 +25,7 @@ import axios from "axios";
 function NewListingForm() {
   //   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState(null);
+  const [file, setFile] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
   console.log("NewListingForm", { formData })
   // switch to use our fancy limited-time-display message hook
@@ -77,6 +78,7 @@ function NewListingForm() {
   /** Handle form data changing */
   function handleChange(evt) {
     console.log("NewListingForm handlechange evt tar", evt.target.value)
+    console.log("NewListingForm evt.target", evt.target.files[0]);
     const { name, value } = evt.target;
 
     setFormData(f => ({
@@ -90,10 +92,12 @@ function NewListingForm() {
 
   async function handlePhotoUpload(evt) {
     evt.preventDefault();
-    const file = formData.imageInput.current.files[0];
+    setFile(evt.target.files[0]);
 
-    // const { url }
+    // get url from server to be able to do put 
+    //const { url }
 
+    // put to S3
     await axios({
       "method": "put",
       "headers": {
@@ -101,6 +105,8 @@ function NewListingForm() {
       },
       "body": file,
     })
+
+    // post to database
   }
 
   return (
