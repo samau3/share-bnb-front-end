@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 // import Alert from "../common/Alert";
-// import JoblyApi from "../api/api";
+import ShareBnbApi from "./Api";
 // import UserContext from "../auth/UserContext";
 // import "./ProfileForm.css"
 
@@ -25,7 +25,7 @@ import axios from "axios";
 function NewListingForm() {
   //   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState(null);
-  const [file, setFile] = useState(null);
+  const [image, setImage] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
   console.log("NewListingForm", { formData })
   // switch to use our fancy limited-time-display message hook
@@ -90,33 +90,49 @@ function NewListingForm() {
     setFormErrors([]);
   }
 
-  async function handlePhotoUpload(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    setFile(evt.target.files[0]);
+    const data = new FormData();
+    data.append('file', image);
+    console.log('handleSubmit data', data)
+    // need to look into encoding file submission properly when sending from FE to BE
+    try {
+      // await ShareBnbApi.uploadNewListings(image);
+      const result = await axios.post("http://localhost:3001/listings/", data, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      console.log('handleSubmit axios', result)
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
+  function handlePhotoUpload(evt) {
+    evt.preventDefault();
+    console.log("handlePhotoUpload evt.target", evt.target.parentElement.querySelector("#imageInput").files[0]);
+
+    setImage(evt.target.parentElement.querySelector("#imageInput").files[0]);
 
     // get url from server to be able to do put 
     //const { url }
 
     // put to S3
-    await axios({
-      "method": "put",
-      "headers": {
-        "Content-Type": "multipart/form-data"
-      },
-      "body": file,
-    })
 
     // post to database
   }
+
 
   return (
     <div className="NewListingForm col-md-6 col-lg-4 offset-md-3 offset-lg-4">
       <h3>Add a New Listing</h3>
       <div className="card">
         <div className="card-body">
-          <form>
+          <form method="POST" onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="mb-3">
-              <label htmlFor="imageInput" className="form-label">Username</label>
+              <label htmlFor="imageInput" className="form-label">Image</label>
               <input
                 id="imageInput"
                 name="image"
@@ -165,12 +181,11 @@ function NewListingForm() {
               <Alert type="success" messages={["Updated successfully."]} />
               : null} */}
 
-            {/* <div className="d-grid">
-              <button type="submit" className="btn btn-primary" onClick={handleSubmit}>
-                Add Photo
+            <div className="d-grid">
+              <button type="submit" className="btn btn-primary">
+                Submit Listing
               </button>
-            </div> */}
-
+            </div>
           </form>
         </div>
       </div>
