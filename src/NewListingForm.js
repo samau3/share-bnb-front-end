@@ -23,100 +23,100 @@ import axios from "axios";
  */
 
 function NewListingForm() {
-    //   const { currentUser, setCurrentUser } = useContext(UserContext);
-    const [formData, setFormData] = useState(null);
-    const [formErrors, setFormErrors] = useState([]);
+  //   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [formData, setFormData] = useState(null);
+  const [formErrors, setFormErrors] = useState([]);
+  console.log("NewListingForm", { formData })
+  // switch to use our fancy limited-time-display message hook
+  //   const [saveConfirmed, setSaveConfirmed] = useState(false);
+  // const [saveConfirmed, setSaveConfirmed] = useTimedMessage()
 
-    // switch to use our fancy limited-time-display message hook
-    //   const [saveConfirmed, setSaveConfirmed] = useState(false);
-    // const [saveConfirmed, setSaveConfirmed] = useTimedMessage()
+  //   console.debug(
+  //     "NewListingForm",
+  //     "currentUser=", currentUser,
+  //     "formData=", formData,
+  //     "formErrors=", formErrors,
+  //     "saveConfirmed=", saveConfirmed,
+  //   );
 
-    //   console.debug(
-    //     "NewListingForm",
-    //     "currentUser=", currentUser,
-    //     "formData=", formData,
-    //     "formErrors=", formErrors,
-    //     "saveConfirmed=", saveConfirmed,
-    //   );
+  /** on form submit:
+   * - attempt save to backend & report any errors
+   * - if successful
+   *   - clear previous error messages
+   *   - show save-confirmed message
+   *   - set current user info throughout the site
+   */
 
-    /** on form submit:
-     * - attempt save to backend & report any errors
-     * - if successful
-     *   - clear previous error messages
-     *   - show save-confirmed message
-     *   - set current user info throughout the site
-     */
+  //   async function handleSubmit(evt) {
+  //     evt.preventDefault();
 
-    //   async function handleSubmit(evt) {
-    //     evt.preventDefault();
+  //     let profileData = {
+  //       firstName: formData.firstName,
+  //       lastName: formData.lastName,
+  //       email: formData.email,
+  //     };
 
-    //     let profileData = {
-    //       firstName: formData.firstName,
-    //       lastName: formData.lastName,
-    //       email: formData.email,
-    //     };
+  //     let username = formData.username;
+  //     let updatedUser;
 
-    //     let username = formData.username;
-    //     let updatedUser;
+  //     try {
+  //       updatedUser = await JoblyApi.saveProfile(username, profileData);
+  //     } catch (errors) {
+  //       setFormErrors(errors);
+  //       return;
+  //     }
 
-    //     try {
-    //       updatedUser = await JoblyApi.saveProfile(username, profileData);
-    //     } catch (errors) {
-    //       setFormErrors(errors);
-    //       return;
-    //     }
+  //     setFormData(f => ({ ...f }));
+  //     setFormErrors([]);
+  //     setSaveConfirmed(true);
 
-    //     setFormData(f => ({ ...f }));
-    //     setFormErrors([]);
-    //     setSaveConfirmed(true);
+  //     // trigger reloading of user information throughout the site
+  //     setCurrentUser(updatedUser);
+  //   }
 
-    //     // trigger reloading of user information throughout the site
-    //     setCurrentUser(updatedUser);
-    //   }
+  /** Handle form data changing */
+  function handleChange(evt) {
+    const { name, value } = evt.target;
+    setFormData(f => ({
+      ...f,
+      [name]: value,
+    }));
+    setFormErrors([]);
+  }
 
-    /** Handle form data changing */
-    function handleChange(evt) {
-        const { name, value } = evt.target;
-        setFormData(f => ({
-            ...f,
-            [name]: value,
-        }));
-        setFormErrors([]);
-    }
+  async function handlePhotoUpload(evt) {
+    evt.preventDefault();
+    const file = formData.imageInput.files[0];
 
-    async function handlePhotoUpload(evt) {
-        evt.preventDefault();
-        const file = formData.imageInput.files[0];
+    // const { url }
 
-        const {url}
+    await axios({
+      "method": "put",
+      "headers": {
+        "Content-Type": "multipart/form-data"
+      },
+      "body": file,
+    })
+  }
 
-        await axios({
-            "method": "put",
-            "headers": {
-                "Content-Type": "multipart/form-data"
-            },
-            "body": file,
-        })
-}
-
-return (
+  return (
     <div className="NewListingForm col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-        <h3>Add a New Listing</h3>
-        <div className="card">
-            <div className="card-body">
-                <form>
-                    <div className="mb-3">
-                        <label htmlFor="imageInput" className="form-label">Username</label>
-                        <input
-                            id="imageInput"
-                            type="file"
-                            accept="image/*"
-                            className="form-control"
-                            placeholder="Add a Photo"
-                        />
-                        <button className="btn btn-primary" onClick={handlePhotoUpload}>Save Photo</button>
-                    </div>
-                    {/* <div className="mb-3">
+      <h3>Add a New Listing</h3>
+      <div className="card">
+        <div className="card-body">
+          <form>
+            <div className="mb-3">
+              <label htmlFor="imageInput" className="form-label">Username</label>
+              <input
+                id="imageInput"
+                type="file"
+                accept="image/*"
+                className="form-control"
+                placeholder="Add a Photo"
+              />
+              <button className="btn btn-primary" onClick={handlePhotoUpload}>Save Photo</button>
+            </div>
+            {/* <div className="mb-3">
               <label className="form-label">First Name</label>
               <input
                 name="firstName"
@@ -153,17 +153,17 @@ return (
               <Alert type="success" messages={["Updated successfully."]} />
               : null} */}
 
-                    {/* <div className="d-grid">
+            {/* <div className="d-grid">
               <button type="submit" className="btn btn-primary" onClick={handleSubmit}>
                 Add Photo
               </button>
             </div> */}
 
-                </form>
-            </div>
+          </form>
         </div>
+      </div>
     </div>
-);
+  );
 }
 
 export default NewListingForm;
