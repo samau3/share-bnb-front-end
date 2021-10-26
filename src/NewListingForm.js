@@ -76,17 +76,21 @@ function NewListingForm() {
 
   /** Handle form data changing */
   function handleChange(evt) {
+    console.log("NewListingForm handlechange evt tar", evt.target.value)
     const { name, value } = evt.target;
+
     setFormData(f => ({
       ...f,
       [name]: value,
     }));
+    console.log("NewListingForm handlechange", { formData })
+
     setFormErrors([]);
   }
 
   async function handlePhotoUpload(evt) {
     evt.preventDefault();
-    const file = formData.imageInput.files[0];
+    const file = formData.imageInput.current.files[0];
 
     // const { url }
 
@@ -109,10 +113,12 @@ function NewListingForm() {
               <label htmlFor="imageInput" className="form-label">Username</label>
               <input
                 id="imageInput"
+                name="image"
                 type="file"
                 accept="image/*"
                 className="form-control"
                 placeholder="Add a Photo"
+                onChange={handleChange}
               />
               <button className="btn btn-primary" onClick={handlePhotoUpload}>Save Photo</button>
             </div>
