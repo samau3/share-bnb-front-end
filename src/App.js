@@ -3,7 +3,13 @@ import Routes from './Routes';
 import Navbar from './Navbar';
 import { BrowserRouter } from "react-router-dom";
 
+/** ShareBnB application.
+ *
+ * App -> { Routes, Navbar }
+ */
+
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>

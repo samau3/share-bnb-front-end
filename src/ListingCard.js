@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// import "./CompanyCard.css";
 
 /** Show limited information about a listing
  *
- * Is rendered by CompanyList to show a "card" for each company.
+ * Props: 
+ * - Information about a single listing
+ * - { id, name, city, state, country, description, photoUrl }
+ * 
+ * State:
+ * - None
  *
- * CompanyList -> CompanyCard
+ * Listings -> ListingCard
  */
 
 function ListingCard({ name, city, state, country, description, photoUrl, id }) {
@@ -15,15 +19,19 @@ function ListingCard({ name, city, state, country, description, photoUrl, id }) 
 
     return (
         <Link className="ListingCard card" to={`/listings/${id}`}>
-            <div className="card-body">
-                <h6 className="card-title">
+            <div className="card-body text-decoration-none">
+                <h5 className="card-title text-center">
                     {name}
+                </h5>
+                <div className="row">
                     {photoUrl && <img src={photoUrl}
                         alt={name}
-                        className="float-end ms-5" />}
-                </h6>
-                <p><small>{description}</small></p>
-                <p><small>{city} {state}, {country}</small></p>
+                        className="float-end ms-5 col-2 img-thumbnail" />}
+                    <div className="col">
+                        <p className="text-left"><small>{description}</small></p>
+                        <p className="text-left"><small>{city} {state}, {country}</small></p>
+                    </div>
+                </div>
             </div>
         </Link>
     );

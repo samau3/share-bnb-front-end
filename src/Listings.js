@@ -10,7 +10,7 @@ import ListingCard from "./ListingCard";
  *
  * This is routed to at /listings
  *
- * Routes -> Listings -> {SearchForm, ListingCard}
+ * Routes -> Listings -> { SearchForm, ListingCard }
  */
 
 function Listings() {

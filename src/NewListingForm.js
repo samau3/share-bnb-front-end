@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 // import Alert from "../common/Alert";
 import ShareBnbApi from "./Api";
@@ -37,66 +38,23 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
   const [formData, setFormData] = useState(initalFormData);
   const [image, setImage] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
-  console.log("NewListingForm", { formData })
-  // switch to use our fancy limited-time-display message hook
-  //   const [saveConfirmed, setSaveConfirmed] = useState(false);
-  // const [saveConfirmed, setSaveConfirmed] = useTimedMessage()
+  // const [formSubmitted, setFormSubmitted] = useState(false);
+  console.log("NewListingForm", { formData, image, formErrors })
 
-  //   console.debug(
-  //     "NewListingForm",
-  //     "currentUser=", currentUser,
-  //     "formData=", formData,
-  //     "formErrors=", formErrors,
-  //     "saveConfirmed=", saveConfirmed,
-  //   );
+  // useEffect(function resetFormSubmitted() {
+  //   setFormSubmitted(false);
+  // }, []);
 
-  /** on form submit:
-   * - attempt save to backend & report any errors
-   * - if successful
-   *   - clear previous error messages
-   *   - show save-confirmed message
-   *   - set current user info throughout the site
-   */
-
-  //   async function handleSubmit(evt) {
-  //     evt.preventDefault();
-
-  //     let profileData = {
-  //       firstName: formData.firstName,
-  //       lastName: formData.lastName,
-  //       email: formData.email,
-  //     };
-
-  //     let username = formData.username;
-  //     let updatedUser;
-
-  //     try {
-  //       updatedUser = await JoblyApi.saveProfile(username, profileData);
-  //     } catch (errors) {
-  //       setFormErrors(errors);
-  //       return;
-  //     }
-
-  //     setFormData(f => ({ ...f }));
-  //     setFormErrors([]);
-  //     setSaveConfirmed(true);
-
-  //     // trigger reloading of user information throughout the site
-  //     setCurrentUser(updatedUser);
-  //   }
 
   /** Handle form data changing */
   function handleChange(evt) {
-    // console.log("NewListingForm handlechange evt tar", evt.target.value)
-    // console.log("NewListingForm evt.target", evt.target.files[0]);
     const { name, value } = evt.target;
 
     setFormData(f => ({
       ...f,
       [name]: value,
     }));
-    console.log("NewListingForm handlechange", { formData })
-
+    // console.log("NewListingForm handlechange", { formData })
     setFormErrors([]);
   }
 
@@ -115,21 +73,19 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
 
     try {
       const result = await ShareBnbApi.uploadNewListing(data);
+      // setFormSubmitted(true);
       console.log('handleSubmit axios', result)
+      return <Redirect to="listings" />
     } catch (err) {
       console.log(err);
       setFormErrors(err);
     }
-
   }
 
-  function handlePhotoUpload(evt) {
-    evt.preventDefault();
-    console.log("handlePhotoUpload evt.target", evt.target.parentElement.querySelector("#photoInput").files[0]);
-
-    setImage(evt.target.parentElement.querySelector("#photoInput").files[0]);
+  function handlePhoto(evt) {
+    setImage(evt.target.files[0]);
+    // console.log("evt.target.file", evt.target.files[0]);
   }
-
 
   return (
     <div className="NewListingForm col-md-6 col-lg-4 offset-md-3 offset-lg-4">
@@ -146,9 +102,8 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 accept="image/*"
                 className="form-control"
                 placeholder="Add a Photo"
-                onChange={handleChange}
+                onChange={handlePhoto}
               />
-              <button className="btn btn-primary" onClick={handlePhotoUpload}>Save Photo</button>
             </div>
             <div className="mb-3">
               <label className="form-label">Name</label>

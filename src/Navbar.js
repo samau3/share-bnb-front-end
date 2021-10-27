@@ -1,5 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 
+
+/** Navigation bar that will show up on all pages
+ * 
+ *  Props:
+ *  - None
+ * 
+ *  State:
+ *  - None
+ * 
+ *  App -> Navbar
+ * 
+ */
 function Navbar() {
     return (
         <nav className="Navigation navbar navbar-expand-md">

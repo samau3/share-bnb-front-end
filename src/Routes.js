@@ -5,7 +5,19 @@ import Listings from "./Listings";
 import Listing from "./Listing";
 import NewListingForm from "./NewListingForm";
 
-
+/** Site-wide routes. Visiting a non-existant route
+ *  redirects to the homepage.
+ *  
+ *  Props: 
+ *  - None
+ * 
+ *  State:
+ *  - None
+ * 
+ *  App -> Routes 
+ *          -> { Homepage, Listing, Listings, NewListingForm }
+ * 
+ */
 function Routes() {
     return (
         <Switch>

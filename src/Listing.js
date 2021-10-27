@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ShareBnbApi from "./Api";
-// import JobCardList from "../jobs/JobCardList";
 
 /** Listing Detail page.
  *
@@ -28,9 +27,9 @@ function Listing() {
     return (
       <div id={id} className="Listing col-md-8 offset-md-2">
         <h4 className="Listing">{listing.name}</h4>
-        <p className="Listing">{listing.description}</p>
         <p className="Listing">{listing.city}, {listing.state}, {listing.country}</p>
-        <img className="Listing" src={listing.photoUrl} alt="listing" />
+        <p className="Listing">{listing.description}</p>
+        {listing.photoUrl && <img className="Listing w-75" src={listing.photoUrl} alt="listing" />}
       </div>
     );
 }
