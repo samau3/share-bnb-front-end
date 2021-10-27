@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 // import Alert from "../common/Alert";
-import ShareBnbApi from "./Api";
+// import ShareBnbApi from "./Api";
 // import UserContext from "../auth/UserContext";
 // import "./ProfileForm.css"
 
@@ -114,7 +114,8 @@ function NewListingForm() {
       })
       console.log('handleSubmit axios', result)
     } catch (err) {
-      console.log(err)
+      console.log(err);
+      setFormErrors(err);
     }
 
   }
@@ -123,14 +124,7 @@ function NewListingForm() {
     evt.preventDefault();
     console.log("handlePhotoUpload evt.target", evt.target.parentElement.querySelector("#photoInput").files[0]);
 
-    setImage(evt.target.parentElement.querySelector("#photoInput").files[0]);
-
-    // get url from server to be able to do put 
-    //const { url }
-
-    // put to S3
-
-    // post to database
+    setImage(evt.target.parentElement.querySelector("#imageInput").files[0]);
   }
 
 
