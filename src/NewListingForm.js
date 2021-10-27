@@ -93,8 +93,9 @@ function NewListingForm() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     const data = new FormData();
+    // console.log('handleSuvmit image', image)
     data.append('file', image);
-    console.log('handleSubmit data', data)
+    console.log('handleSubmit data', data.get('file'))
     // need to look into encoding file submission properly when sending from FE to BE
     try {
       // await ShareBnbApi.uploadNewListings(image);
