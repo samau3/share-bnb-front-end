@@ -29,13 +29,18 @@ class ShareBnbApi {
         return result.listing;
     }
 
+    static async getListings(searchTermData) {
+        const result = await this.request(`listings/`, searchTermData)
+        return result.listings;
+    }
+
     static async uploadNewListing(data) {
         const result = await axios.post(`${BASE_URL}/listings/`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
-      return result;
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+        return result;
     }
 }
 
