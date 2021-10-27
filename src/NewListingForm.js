@@ -24,7 +24,15 @@ import ShareBnbApi from "./Api";
 
 function NewListingForm() {
   //   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    street: "",
+    city: "",
+    state: "",
+    country: "",
+    description: "",
+    photoUrl: ""
+  });
   const [image, setImage] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
   console.log("NewListingForm", { formData })
@@ -77,8 +85,8 @@ function NewListingForm() {
 
   /** Handle form data changing */
   function handleChange(evt) {
-    console.log("NewListingForm handlechange evt tar", evt.target.value)
-    console.log("NewListingForm evt.target", evt.target.files[0]);
+    // console.log("NewListingForm handlechange evt tar", evt.target.value)
+    // console.log("NewListingForm evt.target", evt.target.files[0]);
     const { name, value } = evt.target;
 
     setFormData(f => ({
@@ -113,9 +121,9 @@ function NewListingForm() {
 
   function handlePhotoUpload(evt) {
     evt.preventDefault();
-    console.log("handlePhotoUpload evt.target", evt.target.parentElement.querySelector("#imageInput").files[0]);
+    console.log("handlePhotoUpload evt.target", evt.target.parentElement.querySelector("#photoInput").files[0]);
 
-    setImage(evt.target.parentElement.querySelector("#imageInput").files[0]);
+    setImage(evt.target.parentElement.querySelector("#photoInput").files[0]);
 
     // get url from server to be able to do put 
     //const { url }
@@ -133,10 +141,10 @@ function NewListingForm() {
         <div className="card-body">
           <form method="POST" onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="mb-3">
-              <label htmlFor="imageInput" className="form-label">Image</label>
+              <label htmlFor="photoInput" className="form-label">Photo</label>
               <input
-                id="imageInput"
-                name="image"
+                id="photoInput"
+                name="photoUrl"
                 type="file"
                 accept="image/*"
                 className="form-control"
@@ -145,35 +153,54 @@ function NewListingForm() {
               />
               <button className="btn btn-primary" onClick={handlePhotoUpload}>Save Photo</button>
             </div>
-            {/* <div className="mb-3">
-              <label className="form-label">First Name</label>
+            <div className="mb-3">
+              <label className="form-label">Name</label>
               <input
-                name="firstName"
+                name="name"
                 className="form-control"
-                value={formData.firstName}
+                value={formData.name}
                 onChange={handleChange}
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Last Name</label>
+              <label className="form-label">Street</label>
               <input
-                name="lastName"
+                name="street"
                 className="form-control"
-                value={formData.lastName}
+                value={formData.street}
                 onChange={handleChange}
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Email</label>
+              <label className="form-label">City</label>
               <input
-                name="email"
+                name="city"
                 className="form-control"
-                value={formData.email}
+                value={formData.city}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Country</label>
+              <input
+                name="country"
+                className="form-control"
+                value={formData.country}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Description</label>
+              <input
+                type="textarea"
+                name="description"
+                className="form-control"
+                value={formData.description}
                 onChange={handleChange}
               />
             </div>
 
-            {formErrors.length
+            {/* {formErrors.length
               ? <Alert type="danger" messages={formErrors} />
               : null}
 
