@@ -104,7 +104,11 @@ function NewListingForm() {
     // console.log('handleSuvmit image', image)
     data.append('file', image);
     console.log('handleSubmit data', data.get('file'))
-    // need to look into encoding file submission properly when sending from FE to BE
+    data.append('formDataState', formData)
+    // const obj = {
+    //   ...formData
+    // }
+    // obj.file = data;
     try {
       // await ShareBnbApi.uploadNewListings(image);
       const result = await axios.post("http://localhost:3001/listings/", data, {
@@ -124,7 +128,7 @@ function NewListingForm() {
     evt.preventDefault();
     console.log("handlePhotoUpload evt.target", evt.target.parentElement.querySelector("#photoInput").files[0]);
 
-    setImage(evt.target.parentElement.querySelector("#imageInput").files[0]);
+    setImage(evt.target.parentElement.querySelector("#photoInput").files[0]);
   }
 
 
