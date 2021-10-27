@@ -1,10 +1,13 @@
 import './App.css';
-import NewListingForm from './NewListingForm';
+import Routes from './Routes';
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <NewListingForm />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
 // import Alert from "../common/Alert";
-// import ShareBnbApi from "./Api";
+import ShareBnbApi from "./Api";
 // import UserContext from "../auth/UserContext";
 // import "./ProfileForm.css"
 
 // eslint-disable-next-line
 // import useTimedMessage from "../hooks/useTimedMessage";
+
+const INITIAL_FORM_DATA = {
+  name: "",
+    street: "",
+    city: "",
+    state: "",
+    country: "",
+    description: "",
+    photoUrl: ""
+}
 
 /** Profile editing form.
  *
@@ -22,17 +32,9 @@ import axios from "axios";
  * Routes -> ProfileForm -> Alert
  */
 
-function NewListingForm() {
+function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
   //   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const [formData, setFormData] = useState({
-    name: "",
-    street: "",
-    city: "",
-    state: "",
-    country: "",
-    description: "",
-    photoUrl: ""
-  });
+  const [formData, setFormData] = useState(initalFormData);
   const [image, setImage] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
   console.log("NewListingForm", { formData })
@@ -101,21 +103,18 @@ function NewListingForm() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     const data = new FormData();
-    // console.log('handleSuvmit image', image)
+
     data.append('file', image);
     console.log('handleSubmit data', data.get('file'))
-    data.append('formDataState', formData)
-    // const obj = {
-    //   ...formData
-    // }
-    // obj.file = data;
+
+    // looping through the formData to update data with the
+    // key, value pairs (ex. name: name)
+    for (let obj in formData) {
+      data.append(obj, formData[obj]);
+    }
+
     try {
-      // await ShareBnbApi.uploadNewListings(image);
-      const result = await axios.post("http://localhost:3001/listings/", data, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
+      const result = await ShareBnbApi.uploadNewListing(data);
       console.log('handleSubmit axios', result)
     } catch (err) {
       console.log(err);
@@ -175,6 +174,15 @@ function NewListingForm() {
                 name="city"
                 className="form-control"
                 value={formData.city}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">State</label>
+              <input
+                name="state"
+                className="form-control"
+                value={formData.state}
                 onChange={handleChange}
               />
             </div>

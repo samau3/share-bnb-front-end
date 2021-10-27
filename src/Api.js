@@ -24,10 +24,18 @@ class ShareBnbApi {
         }
     }
 
-    static async uploadNewListings(image) {
-        console.log("uploadNewListings", image)
-        const results = await this.request(`listings/`, image, "post");
-        console.log("uploaded", results);
+    static async getListing(id) {
+        const result = await this.request(`listings/${id}`)
+        return result.listing;
+    }
+
+    static async uploadNewListing(data) {
+        const result = await axios.post(`${BASE_URL}/listings/`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      return result;
     }
 }
 
