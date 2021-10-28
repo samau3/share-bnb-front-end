@@ -82,6 +82,8 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
   }
 
   function handlePhoto(evt) {
+    // need to make a callback to adding more photos doesn't override existing uploaded state
+    // also need to spread curr state array
     setImage(evt.target.files[0]);
   }
 
