@@ -4,6 +4,7 @@ import Homepage from "./Homepage";
 import Listings from "./Listings";
 import Listing from "./Listing";
 import NewListingForm from "./NewListingForm";
+import LoginForm from "./LoginForm";
 
 /** Site-wide routes. Visiting a non-existant route
  *  redirects to the homepage.
@@ -18,7 +19,7 @@ import NewListingForm from "./NewListingForm";
  *          -> { Homepage, Listing, Listings, NewListingForm }
  * 
  */
-function Routes() {
+function Routes({ handleLogin }) {
     return (
         <Switch>
             <Route exact path="/">
@@ -35,6 +36,10 @@ function Routes() {
 
             <Route exact path="/addListing">
                 <NewListingForm />
+            </Route>
+
+            <Route exact path="/login">
+                <LoginForm handleLogin={handleLogin} />
             </Route>
 
             <Redirect to="/" />

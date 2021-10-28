@@ -12,7 +12,7 @@ import { Link, NavLink } from "react-router-dom";
  *  App -> Navbar
  * 
  */
-function Navbar() {
+function Navbar({ handleLogout }) {
     return (
         <nav className="Navigation navbar navbar-expand-md">
             <div className="container-fluid">
