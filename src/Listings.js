@@ -28,7 +28,6 @@ function Listings() {
         search();
     }, []);
 
-
     if (!listings) return <h1>Loading...</h1>;
     console.log("Listings component", listings)
     return (
