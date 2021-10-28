@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-
+import { useContext } from "react";
+import UserContext from "./UserContext";
 
 /** Navigation bar that will show up on all pages
  * 
@@ -13,13 +14,15 @@ import { Link, NavLink } from "react-router-dom";
  * 
  */
 function Navbar({ handleLogout }) {
+    const currentUser = useContext(UserContext);
+
     return (
         <nav className="Navigation navbar navbar-expand-md">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
                     ShareBnB
                 </Link>
-                <ul className="navbar-nav ms-auto">
+                {currentUser && <ul className="navbar-nav ms-auto">
                     <li className="nav-item me-4">
                         <NavLink className="nav-link" to="/listings">
                             Listings
@@ -30,7 +33,24 @@ function Navbar({ handleLogout }) {
                             Add New Listing
                         </NavLink>
                     </li>
-                </ul>
+                    <li className="nav-item me-4">
+                        <NavLink className="nav-link" to="/logout" onClick={handleLogout}>
+                            Logout
+                        </NavLink>
+                    </li>
+                </ul>}
+                {!currentUser && <ul className="navbar-nav ms-auto">
+                    <li className="nav-item me-4">
+                        <NavLink className="nav-link" to="/signup">
+                            Sign Up
+                        </NavLink>
+                    </li>
+                    <li className="nav-item me-4">
+                        <NavLink className="nav-link" to="/login">
+                            Login
+                        </NavLink>
+                    </li>
+                </ul>}
             </div>
         </nav>
     );

@@ -43,6 +43,17 @@ class ShareBnbApi {
         })
         return result;
     }
+
+    static async signUp(signUpData) {
+        const result = await this.request(`auth/register`, signUpData, "post");
+        return result.token;
+    }
+
+    static async login(loginData) {
+        const result = await this.request(`auth/register`, loginData, "post");
+        return result.token;
+    }
+
 }
 
 export default ShareBnbApi;
