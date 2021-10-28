@@ -25,6 +25,7 @@ class ShareBnbApi {
     }
 
     static async getListing(id) {
+        console.log({id});
         const result = await this.request(`listings/${id}`)
         return result.listing;
     }

@@ -11,12 +11,13 @@ import Alert from "./Alert";
 
 const INITIAL_FORM_DATA = {
   name: "",
-    street: "",
-    city: "",
-    state: "",
-    country: "",
-    description: "",
-    photoUrl: ""
+  street: "",
+  city: "",
+  state: "",
+  country: "",
+  description: "",
+  photoUrl: "",
+  price: 0,
 }
 
 /** Profile editing form.
@@ -33,7 +34,7 @@ const INITIAL_FORM_DATA = {
  * Routes -> ProfileForm -> Alert
  */
 
-function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
+function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
   //   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState(initalFormData);
   const [image, setImage] = useState(null);
@@ -162,6 +163,16 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 name="description"
                 className="form-control"
                 value={formData.description}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Price</label>
+              <input
+                name="price"
+                className="form-control"
+                value={formData.price}
                 onChange={handleChange}
                 required
               />

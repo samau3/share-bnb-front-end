@@ -25,10 +25,11 @@ function Listing() {
     if (!listing) return <h1>Loading...</h1>;
 
     return (
-      <div id={id} className="Listing col-md-8 offset-md-2">
+      <div id={id} className="Listing">
         <h4 className="Listing">{listing.name}</h4>
-        <p className="Listing">{listing.city}, {listing.state}, {listing.country}</p>
-        <p className="Listing">{listing.description}</p>
+        <span className="Listing">{listing.city}, {listing.state}, {listing.country}</span>
+        <p className="Listing">${listing.price}</p>
+        <p className="Listing mx-5">{listing.description}</p>
         {listing.photoUrl && <img className="Listing w-75" src={listing.photoUrl} alt="listing" />}
       </div>
     );
