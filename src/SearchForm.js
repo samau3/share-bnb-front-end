@@ -47,45 +47,43 @@ function SearchForm({ searchFor }) {
   }
 
   return (
-    <div className="SearchForm mb-4">
-      <form onSubmit={handleSubmit}>
-        <div className="row justify-content-center justify-content-lg-start gx-0">
-          <div className="col-8">
-            <input
-              className="form-control form-control-sm bg-white mb-1"
-              name="name"
-              placeholder="Search for Name"
-              value={searchTerms.name}
-              onChange={handleChange}
-            />
-            <input
-              className="form-control form-control-sm bg-white mb-1"
-              name="city"
-              placeholder="Search for City"
-              value={searchTerms.city}
-              onChange={handleChange}
-            />
-            <input
-              className="form-control form-control-sm bg-white mb-1"
-              name="state"
-              placeholder="Search for State"
-              value={searchTerms.state}
-              onChange={handleChange}
-            />
-            <input
-              className="form-control form-control-sm bg-white mb-1"
-              name="country"
-              placeholder="Search for Country"
-              value={searchTerms.country}
-              onChange={handleChange}
-            />
-          </div>
+    <div className="SearchForm mb-4 row justify-content-center">
+      <form onSubmit={handleSubmit} className="col-8">
+        <div className="justify-content-center justify-content-lg-start gx-0">
+          <input
+            className="form-control form-control-sm bg-white mb-1"
+            name="name"
+            placeholder="Search for Name"
+            value={searchTerms.name}
+            onChange={handleChange}
+          />
+          <input
+            className="form-control form-control-sm bg-white mb-1"
+            name="city"
+            placeholder="Search for City"
+            value={searchTerms.city}
+            onChange={handleChange}
+          />
+          <input
+            className="form-control form-control-sm bg-white mb-1"
+            name="state"
+            placeholder="Search for State"
+            value={searchTerms.state}
+            onChange={handleChange}
+          />
+          <input
+            className="form-control form-control-sm bg-white mb-1"
+            name="country"
+            placeholder="Search for Country"
+            value={searchTerms.country}
+            onChange={handleChange}
+          />
         </div>
-          <div className="mt-2">
-            <button type="submit" className="btn btn-sm btn-primary">
-              Submit
-            </button>
-          </div>
+        <div className="mt-2">
+          <button type="submit" className="btn btn-sm btn-primary">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
