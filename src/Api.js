@@ -45,13 +45,20 @@ class ShareBnbApi {
     }
 
     static async signUp(signUpData) {
+        console.log("inside sharebnb api signup");
         const result = await this.request(`auth/register`, signUpData, "post");
+        console.log("result.token", result.token);
         return result.token;
     }
 
     static async login(loginData) {
-        const result = await this.request(`auth/register`, loginData, "post");
+        const result = await this.request(`auth/login`, loginData, "post");
         return result.token;
+    }
+
+    static async getCurrentUser(username) {
+        const result = await this.request(`users/${username}`);
+        return result.user;
     }
 
 }

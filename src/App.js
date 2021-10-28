@@ -21,10 +21,10 @@ function App() {
 
   console.debug(
     "App",
-    "infoLoaded=", needsInfo,
+    "needsInfo=", needsInfo,
     "currentUser=", currentUser,
     "token=", token,
-    "goRedirect=", needsRedirect,
+    "needsRedirect=", needsRedirect,
   );
 
   useEffect(function loadUserInfo() {
@@ -34,25 +34,25 @@ function App() {
       if (token) {
         try {
           let { username } = jwt.decode(token);
+          console.log({username});
           // put the token on the Api class so it can use it to call the API.
           ShareBnbApi.token = token;
           let currentUser = await ShareBnbApi.getCurrentUser(username);
 
           setCurrentUser(currentUser);
           setNeedsRedirect(false);
-
+          setNeedsInfo(false);
         } catch (err) {
           console.error("App loadUserInfo: problem loading", err);
           setCurrentUser(null);
         }
       }
-      setNeedsInfo(false);
     }
 
-    // set infoLoaded to false while async getCurrentUser runs; once the
+    // set needsInfo to true while async getCurrentUser runs; once the
     // data is fetched (or even if an error happens!), this will be set back
     // to false to control the spinner.
-    setNeedsInfo(true);
+    // setNeedsInfo(true);
     getCurrentUser();
   }, [token]);
 
@@ -64,6 +64,7 @@ function App() {
    * Make sure you await this function to see if any error happens.
    */
   async function handleSignUp(signUpData) {
+    console.log("in handleSignUp");
     let token = await ShareBnbApi.signUp(signUpData);
     setToken(token);
     setNeedsRedirect(true);
