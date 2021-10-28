@@ -8,15 +8,15 @@ class ShareBnbApi {
         console.debug("API Call:", endpoint, data, method);
 
         const url = `${BASE_URL}/${endpoint}`;
-        // const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+        const headers = { Authorization: `Bearer ${ShareBnbApi.token}` };
         const params = (method === "get")
             ? data
             : {};
 
         try {
             console.log('Inside try req', { url, method, data, params })
-            console.log("Axios try request", await axios({ url, method, data, params }));
-            return (await axios({ url, method, data, params })).data;
+            // console.log("Axios try request", await axios({ url, method, data, params }));
+            return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
             console.error("API Error:", err.response);
             let message = err.response.data.error.message;
@@ -25,7 +25,7 @@ class ShareBnbApi {
     }
 
     static async getListing(id) {
-        console.log({id});
+        console.log({ id });
         const result = await this.request(`listings/${id}`)
         return result.listing;
     }
@@ -52,7 +52,7 @@ class ShareBnbApi {
     }
 
     static async login(loginData) {
-        const result = await this.request(`auth/login`, loginData, "post");
+        const result = await this.request(`auth/token`, loginData, "post");
         return result.token;
     }
 

@@ -1,7 +1,7 @@
 import './App.css';
 import Routes from './Routes';
 import Navbar from './Navbar';
-import { BrowserRouter, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import ShareBnbApi from './Api';
 import { useState, useEffect } from 'react';
 import UserContext from "./UserContext";
@@ -34,12 +34,10 @@ function App() {
       if (token) {
         try {
           let { username } = jwt.decode(token);
-          console.log({username});
           // put the token on the Api class so it can use it to call the API.
           ShareBnbApi.token = token;
-          let currentUser = await ShareBnbApi.getCurrentUser(username);
-
-          setCurrentUser(currentUser);
+          let resultUser = await ShareBnbApi.getCurrentUser(username);
+          setCurrentUser(resultUser);
           setNeedsRedirect(false);
           setNeedsInfo(false);
         } catch (err) {
@@ -48,7 +46,6 @@ function App() {
         }
       }
     }
-
     // set needsInfo to true while async getCurrentUser runs; once the
     // data is fetched (or even if an error happens!), this will be set back
     // to false to control the spinner.
@@ -99,10 +96,8 @@ function App() {
     <UserContext.Provider
       value={currentUser}>
       <div className="App">
-        <BrowserRouter>
-          <Navbar handleLogout={handleLogout} />
-          <Routes handleLogin={handleLogin} handleSignUp={handleSignUp}/>
-        </BrowserRouter>
+        <Navbar handleLogout={handleLogout} />
+        <Routes handleLogin={handleLogin} handleSignUp={handleSignUp} />
       </div>
     </UserContext.Provider>
   );

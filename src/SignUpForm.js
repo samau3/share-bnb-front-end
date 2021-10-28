@@ -91,7 +91,7 @@ function SignUpForm({ handleSignUp }) {
                 <label className="form-label">Last name</label>
                 <input
                   name="lastName"
-                  className="form-control"
+                  className="form-control form-control-sm"
                   value={formData.lastName}
                   onChange={handleChange}
                 />
