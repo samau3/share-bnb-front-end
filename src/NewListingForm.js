@@ -35,16 +35,15 @@ const INITIAL_FORM_DATA = {
  */
 
 function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
-  //   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState(initalFormData);
   const [image, setImage] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
-  // const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   console.log("NewListingForm", { formData, image, formErrors })
 
-  // useEffect(function resetFormSubmitted() {
-  //   setFormSubmitted(false);
-  // }, []);
+  useEffect(function resetFormSubmitted() {
+    setFormSubmitted(false);
+  }, []);
 
 
   /** Handle form data changing */
@@ -64,7 +63,7 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
     const data = new FormData();
 
     data.append('file', image);
-    console.log('handleSubmit data', data.get('file'))
+    // console.log('handleSubmit data', data.get('file'))
 
     // looping through the formData to update data with the
     // key, value pairs (ex. name: name)
@@ -73,10 +72,9 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
     }
 
     try {
-      const result = await ShareBnbApi.uploadNewListing(data);
-      // setFormSubmitted(true);
-      console.log('handleSubmit axios', result)
-      return <Redirect to="listings" />
+      await ShareBnbApi.uploadNewListing(data);
+      setFormSubmitted(true);
+
     } catch (err) {
       console.log(err);
       setFormErrors(err);
@@ -85,7 +83,10 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
 
   function handlePhoto(evt) {
     setImage(evt.target.files[0]);
-    // console.log("evt.target.file", evt.target.files[0]);
+  }
+
+  if (formSubmitted) {
+    return <Redirect to="/listings" />
   }
 
   return (

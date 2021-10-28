@@ -16,16 +16,18 @@ import ListingCard from "./ListingCard";
 function Listings() {
     const [listings, setListings] = useState(null);
 
+
+    /** Triggered by search form submit; reloads listings. */
+    async function search(searchTermsData) {
+        let resultListings = await ShareBnbApi.getListings(searchTermsData);
+        setListings(resultListings);
+    }
+
     useEffect(function getListingsOnMount() {
         console.debug("Listings useEffect getListingsOnMount");
         search();
     }, []);
 
-    /** Triggered by search form submit; reloads listings. */
-    async function search(searchTermsData) {
-        let listings = await ShareBnbApi.getListings(searchTermsData);
-        setListings(listings);
-    }
 
     if (!listings) return <h1>Loading...</h1>;
     console.log("Listings component", listings)

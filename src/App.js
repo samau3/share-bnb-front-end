@@ -53,6 +53,8 @@ function App() {
     getCurrentUser();
   }, [token]);
 
+
+
   /** Handles site-wide signup.
    *
    * Automatically logs them in (set token) upon signup and sets goRedirect

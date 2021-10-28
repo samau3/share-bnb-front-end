@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router";
 // import "./SearchForm.css";
 
 /** Search form.
@@ -33,6 +34,8 @@ function SearchForm({ searchFor }) {
     evt.preventDefault();
     searchFor(searchTerms);
     setSearchTerms(searchTerms);
+    // TODO: populate form if searched from homepage
+    // return <Redirect to="/listings" />
   }
 
   /** Update form fields */
