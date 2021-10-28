@@ -54,25 +54,15 @@ function Homepage() {
             <h3>FEATURED LISTINGS</h3>
             <div className="row">
                 {featuredListings.map(l => {
-                    const listingTo=`listings/${l.id}`
-                    return(
-                    <div className="col" key={l.id}>
-                        {/* <Link to={listingTo}>
-                            <ListingCard 
-                                name={l.name} 
-                                city={l.city}
-                                state={l.state}
-                                country={l.country}
-                                photoUrl={l.photoUrl}
-                                id={l.id}
-                            />
-                        </Link> */}
-                        <Link to={listingTo}>
-                            <FeatureListing
-                                listing={l}
-                            />
-                        </Link>
-                    </div>
+                    const listingTo = `listings/${l.id}`
+                    return (
+                        <div className="col" key={l.id}>
+                            <Link to={listingTo}>
+                                <FeatureListing
+                                    listing={l}
+                                />
+                            </Link>
+                        </div>
                     )
                 }
 

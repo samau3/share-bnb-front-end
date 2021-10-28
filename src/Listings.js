@@ -34,7 +34,7 @@ function Listings() {
             <SearchForm searchFor={search} />
             {listings.length
                 ? (
-                    <div className="Listings-list">
+                    <div className="Listings-list row justify-content-center">
                         {listings.map(l => (
                             <ListingCard
                                 key={l.id}
@@ -43,7 +43,6 @@ function Listings() {
                                 city={l.city}
                                 state={l.state}
                                 country={l.country}
-                                description={l.description}
                                 photoUrl={l.photoUrl}
                             />
                         ))}
