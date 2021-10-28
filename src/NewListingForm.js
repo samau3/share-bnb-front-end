@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
-// import Alert from "../common/Alert";
+
 import ShareBnbApi from "./Api";
+import Alert from "./Alert";
 // import UserContext from "../auth/UserContext";
 // import "./ProfileForm.css"
 
@@ -112,6 +112,7 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 className="form-control"
                 value={formData.name}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -121,6 +122,7 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 className="form-control"
                 value={formData.street}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -130,6 +132,7 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 className="form-control"
                 value={formData.city}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -139,6 +142,7 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 className="form-control"
                 value={formData.state}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -148,6 +152,7 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 className="form-control"
                 value={formData.country}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -158,14 +163,15 @@ function NewListingForm({ initalFormData=INITIAL_FORM_DATA }) {
                 className="form-control"
                 value={formData.description}
                 onChange={handleChange}
+                required
               />
             </div>
 
-            {/* {formErrors.length
+            {formErrors.length
               ? <Alert type="danger" messages={formErrors} />
               : null}
 
-            {saveConfirmed
+            {/* {saveConfirmed
               ?
               <Alert type="success" messages={["Updated successfully."]} />
               : null} */}
