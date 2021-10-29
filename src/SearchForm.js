@@ -1,41 +1,38 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router";
-// import "./SearchForm.css";
+
+const INITIAL_SEARCH_FORM = {
+  name: "",
+  city: "",
+  state: "",
+  country: ""
+}
 
 /** Search form.
  *
- * Appears on Listings so that these can be filtered down.
+ *  Appears on Listings so that these can be filtered down.
  *
- * This component doesn't *do* the searching, but it renders the search
- * form and calls the `searchFor` function prop that runs in a parent to do the
- * searching.
+ *  This component doesn't *do* the searching, but it renders the search
+ *  form and calls the `searchFor` function prop that runs in a parent to do the
+ *  searching.
  * 
- * Props:
- * - searchFor: function to be called in parent
+ *  Props:
+ *  - searchFor: function to be called in parent
  * 
- * State:
- * - searchTerms: possible criteria to search for
- *  { name, city, state, country }
+ *  State:
+ *  - searchTerms: possible criteria to search for
+ *   { name, city, state, country }
  *
- * Listing -> SearchForm
+ *  Listing -> SearchForm
  */
 
 function SearchForm({ searchFor }) {
-  console.debug("SearchForm", "searchFor=", typeof searchFor);
-  const [searchTerms, setSearchTerms] = useState({
-    name: "",
-    city: "",
-    state: "",
-    country: ""
-  });
+  const [searchTerms, setSearchTerms] = useState(INITIAL_SEARCH_FORM);
 
   /** Tell parent to filter */
   function handleSubmit(evt) {
     evt.preventDefault();
     searchFor(searchTerms);
     setSearchTerms(searchTerms);
-    // TODO: populate form if searched from homepage
-    // return <Redirect to="/listings" />
   }
 
   /** Update form fields */
@@ -46,7 +43,6 @@ function SearchForm({ searchFor }) {
       ...st,
       [name]: value,
     }));
-    console.log("SearchForm handlechange", { searchTerms })
   }
 
   return (

@@ -5,7 +5,7 @@ import UserContext from "./UserContext";
 /** Navigation bar that will show up on all pages
  * 
  *  Props:
- *  - None
+ *  - handleLogout: function to be called in App
  * 
  *  State:
  *  - None

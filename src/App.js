@@ -1,23 +1,34 @@
-import './App.css';
+import jwt from "jsonwebtoken";
+import { Redirect } from "react-router-dom";
+import { useState, useEffect } from 'react';
+
+import ShareBnbApi from './Api';
+import UserContext from "./UserContext";
+
 import Routes from './Routes';
 import Navbar from './Navbar';
-import { Redirect } from "react-router-dom";
-import ShareBnbApi from './Api';
-import { useState, useEffect } from 'react';
-import UserContext from "./UserContext";
-import jwt from "jsonwebtoken";
 
-const LOCAL_STORAGE_TOKEN_KEY = "token"
+const LOCAL_STORAGE_TOKEN_KEY = "token";
+
 /** ShareBnB application.
+ * 
+ *  Props:
+ *  - None
+ * 
+ *  State:
+ *  - needsInfo: true/false
+ *  - currentUser: { username, firstName, lastName, email, isAdmin }
+ *  - token: string returned from the server/local storage
+ *  - needsRedirect: true/false
  *
  * App -> { Routes, Navbar }
  */
 
 function App() {
   const [needsInfo, setNeedsInfo] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY));
   const [needsRedirect, setNeedsRedirect] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY));
+  const [currentUser, setCurrentUser] = useState(null);
 
   console.debug(
     "App",
@@ -28,8 +39,6 @@ function App() {
   );
 
   useEffect(function loadUserInfo() {
-    console.debug("App useEffect loadUserInfo", "token=", token);
-
     async function getCurrentUser() {
       if (token) {
         try {
@@ -46,24 +55,17 @@ function App() {
         }
       }
     }
-    // set needsInfo to true while async getCurrentUser runs; once the
-    // data is fetched (or even if an error happens!), this will be set back
-    // to false to control the spinner.
-    // setNeedsInfo(true);
     getCurrentUser();
   }, [token]);
 
 
-
   /** Handles site-wide signup.
    *
-   * Automatically logs them in (set token) upon signup and sets goRedirect
-   * state to true.
-   *
-   * Make sure you await this function to see if any error happens.
+   *  Automatically logs them in (set token) upon signup, sets 
+   *  localStorage with the token and sets needsRedirect state
+   *  to true.
    */
   async function handleSignUp(signUpData) {
-    console.log("in handleSignUp");
     let token = await ShareBnbApi.signUp(signUpData);
     setToken(token);
     setNeedsRedirect(true);
@@ -72,9 +74,8 @@ function App() {
 
   /** Handles site-wide login.
    *
-   * Logs in a user and sets needsRedirect state to true.
-   *
-   * Make sure you await this function to see if any error happens.
+   *  Logs in a user, sets localStorage with token and sets 
+   *  needsRedirect state to true.
    */
   async function handleLogin(loginData) {
     let token = await ShareBnbApi.login(loginData);
@@ -83,7 +84,11 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
   }
 
-  /** Handles site-wide logout. */
+  /** Handles site-wide logout. 
+   * 
+   *  sets currentUser and token to null and removes the token
+   *  from localStorage.
+  */
   function handleLogout() {
     setCurrentUser(null);
     setToken(null);
@@ -95,8 +100,7 @@ function App() {
   }
 
   return (
-    <UserContext.Provider
-      value={currentUser}>
+    <UserContext.Provider value={currentUser}>
       <div className="App">
         <Navbar handleLogout={handleLogout} />
         <Routes handleLogin={handleLogin} handleSignUp={handleSignUp} />

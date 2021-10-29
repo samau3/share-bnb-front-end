@@ -1,28 +1,28 @@
-import FeatureListing from "./FeatureListing";
-import ShareBnbApi from "./Api";
-import ListingCard from "./ListingCard";
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import SearchForm from "./SearchForm";
+
+import ShareBnbApi from "./Api";
+import FeatureListing from "./FeatureListing";
+// import SearchForm from "./SearchForm";
+
 
 /** Component for homepage
  * 
  *  Props:
  *  - None
  * 
- *  State: 
- *  - None
+ *  State:
+ *  - featureIds: an array of ids for the featured listing section [3, 8]
+ *  - featuredListings: an array of listings from the featured listing
+ *  - needsLoading: true/false
  * 
- *  App -> Routes -> Homepage
+ *  Routes -> Homepage -> FeatureListing
  */
 
 function Homepage() {
-
+    const [featureIds, setFeatureIds] = useState([3, 8]);
     const [featuredListings, setFeaturedListings] = useState([]);
     const [needsLoading, setNeedsLoading] = useState(true);
-    const [featureIds, setFeatureIds] = useState([3, 8]);
-    console.log("Homepage", { featuredListings, needsLoading });
 
     useEffect(function getFeatureListingOnMount() {
         async function getFeatureListing() {
@@ -30,9 +30,6 @@ function Homepage() {
                 return await ShareBnbApi.getListing(id);
             }))
             setFeaturedListings(listings);
-            // const feature1 = await ShareBnbApi.getListing(id1);
-            // const feature2 = await ShareBnbApi.getListing(id2);
-            // setListings([feature1, feature2]);
             setNeedsLoading(false);
         }
         getFeatureListing()
@@ -40,12 +37,11 @@ function Homepage() {
 
     if (needsLoading) return <h1>Loading...</h1>
 
-    console.log("Homepage end", { featuredListings, needsLoading });
     return (
         <div className="Homepage container text-center mt-5">
             <div className="jumbotron">
                 <h1 className="Homepage-header mb-4 fw-bold display-1">Share BnB</h1>
-                <p className="lead">Find a place to stay.</p>
+                <p className="lead">Find a private outdoor space.</p>
                 {/* <SearchForm searchFor={searchFor} /> */}
                 {/* {currentUser &&
                 <h2>Welcome {currentUser.firstName} {currentUser.lastName}!</h2>
@@ -65,7 +61,6 @@ function Homepage() {
                         </div>
                     )
                 }
-
                 )}
             </div>
         </div>

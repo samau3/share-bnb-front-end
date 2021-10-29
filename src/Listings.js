@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from "react";
-import SearchForm from "./SearchForm";
+
 import ShareBnbApi from "./Api";
+import SearchForm from "./SearchForm";
 import ListingCard from "./ListingCard";
+
 
 /** Show page with list of listings.
  *
- * On mount, loads listings from API.
- * Re-loads filtered listings on submit from search form.
+ *  On mount, loads listings from API.
+ *  Re-loads filtered listings on submit from search form.
  *
- * This is routed to at /listings
- *
- * Routes -> Listings -> { SearchForm, ListingCard }
+ *  This is routed to at /listings
+ * 
+ *  Props: 
+ *  - None
+ * 
+ *  State:
+ *  - listings: an array of listings
+ *      [ { id, name, street, city, state, country, description, photoUrls, price },...]
+ * 
+ *  Routes -> Listings -> { SearchForm, ListingCard }
  */
 
 function Listings() {
     const [listings, setListings] = useState(null);
 
+    useEffect(function getListingsOnMount() {
+        search();
+    }, []);
 
     /** Triggered by search form submit; reloads listings. */
     async function search(searchTermsData) {
@@ -23,13 +35,8 @@ function Listings() {
         setListings(resultListings);
     }
 
-    useEffect(function getListingsOnMount() {
-        console.debug("Listings useEffect getListingsOnMount");
-        search();
-    }, []);
-
     if (!listings) return <h1>Loading...</h1>;
-    console.log("Listings component", listings)
+
     return (
         <div className="Listings col-md-8 offset-md-2">
             <SearchForm searchFor={search} />
@@ -53,7 +60,6 @@ function Listings() {
                 )}
         </div>
     );
-
 }
 
 export default Listings;

@@ -7,6 +7,16 @@ import UserContext from "./UserContext";
  * This component will check if there is a valid current user and 
  * only continues to the route if so. If no user is present, 
  * redirects to login form.
+ * 
+ *  Props:
+ *  - exact: true/false
+ *  - path: location to route to 
+ *  - children: component to render
+ * 
+ *  State:
+ *  - None
+ * 
+ *  Routes -> Private Route -> { Redirect, children }
  */
 
 function PrivateRoute({ exact, path, children }) {

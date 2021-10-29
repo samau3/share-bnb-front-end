@@ -1,25 +1,26 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import Homepage from "./Homepage";
+import PrivateRoute from "./PrivateRoute";
 import Listings from "./Listings";
 import Listing from "./Listing";
 import NewListingForm from "./NewListingForm";
 import LoginForm from "./LoginForm";
-import PrivateRoute from "./PrivateRoute";
 import SignUpForm from "./SignUpForm";
 
 /** Site-wide routes. Visiting a non-existant route
  *  redirects to the homepage.
  *  
  *  Props: 
- *  - None
+ *  - handleLogin: function to be called in App
+ *  - handleSignUp: function to be called in App
  * 
  *  State:
  *  - None
  * 
  *  App -> Routes 
  *          -> { Homepage, LoginForm, SignUpForm }
- *          -> { Listing, Listings, NewListingForm }
+ *          -> Private Routes -> { Listing, Listings, NewListingForm }
  */
 function Routes({ handleLogin, handleSignUp }) {
     return (

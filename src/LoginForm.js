@@ -1,26 +1,38 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
+
 import UserContext from "./UserContext";
 import Alert from "./Alert";
+
+const INITIAL_LOGIN_FORM = {
+  username: "",
+  password: "",
+}
 
 
 /** Login form.
  *
- * Shows form and manages update to state on changes.
- * On submission:
- * - calls login function prop
+ *  Shows form and manages update to state on changes.
+ *  On submission:
+ *  - calls login function prop
  *
- * Routes -> LoginForm -> Alert
- * Routed as /login
+ *  Routed as /login
+ * 
+ *  Props:
+ *  - handleLogin: a function to be called in parent
+ * 
+ *  State:
+ *  - formData: inputs from the form
+ *  - formErrors: error messages from form submission
+ * 
+ *  Routes -> LoginForm -> Alert
  */
 
 function LoginForm({ handleLogin }) {
   const [formErrors, setFormErrors] = useState([]);
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState(INITIAL_LOGIN_FORM);
   const currentUser = useContext(UserContext);
+
   if (currentUser) return <Redirect to="/" />
 
   console.debug(
@@ -30,9 +42,9 @@ function LoginForm({ handleLogin }) {
     "formErrors", formErrors,
   );
 
-  /** Handle form submit:
+  /** Handle form submit. Calls login prop function
    *
-   * Calls login func prop and, if not successful, sets errors.
+   *  If not successful, sets errors.
    */
   async function handleSubmit(evt) {
     evt.preventDefault();

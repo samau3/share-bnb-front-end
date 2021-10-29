@@ -1,31 +1,34 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import UserContext from "./UserContext";
+
 import Alert from "./Alert";
 
+const INITIAL_SIGNUP_FORM = {
+  username: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+};
 
 /** Signup form.
  * 
+ *  Routed as /signup
+ * 
  *  Props:
- *  - handleSignUp: function to be called in parent
+ *  - handleSignUp: function to be called in App
+ * 
+ *  State:
+ *  - formData: form inputs
+ *  - formErrors: error messages from submitting form
  *
- * Shows form and manages update to state on changes.
- * On submission:
- * - calls signup function prop
- *
- * Routes -> SignupForm -> Alert
- * Routed as /signup
+ *  Routes -> SignupForm -> Alert
  */
 
 function SignUpForm({ handleSignUp }) {
+  const [formData, setFormData] = useState(INITIAL_SIGNUP_FORM);
   const [formErrors, setFormErrors] = useState([]);
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-  });
 
   const currentUser = useContext(UserContext);
   if (currentUser) return <Redirect to="/" />

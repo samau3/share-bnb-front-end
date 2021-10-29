@@ -1,7 +1,8 @@
 /** Shows featured listings 
  * 
  *  Props:
- *  - listing
+ *  - listing: a single listing object
+ *      { name, city, state, country, photoUrls }
  * 
  *  State:
  *  - None
