@@ -20,7 +20,7 @@ import FeatureListing from "./FeatureListing";
  */
 
 function Homepage() {
-    const [featureIds, setFeatureIds] = useState([3, 8]);
+    const [featureIds, setFeatureIds] = useState([6, 8]);
     const [featuredListings, setFeaturedListings] = useState([]);
     const [needsLoading, setNeedsLoading] = useState(true);
 

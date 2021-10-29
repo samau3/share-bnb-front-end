@@ -30,7 +30,7 @@ function Listing() {
   if (!listing) return <h1>Loading...</h1>;
 
   return (
-    <div id={id} className="Listing">
+    <div id={id} className="Listing mb-5">
       <h4 className="Listing">{listing.name}</h4>
       <span className="Listing">{listing.city}, {listing.state}, {listing.country}</span>
       <p className="Listing">${listing.price}</p>

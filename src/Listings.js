@@ -38,7 +38,7 @@ function Listings() {
     if (!listings) return <h1>Loading...</h1>;
 
     return (
-        <div className="Listings col-md-8 offset-md-2">
+        <div className="Listings col-md-8 offset-md-2 mb-5">
             <SearchForm searchFor={search} />
             {listings.length
                 ? (

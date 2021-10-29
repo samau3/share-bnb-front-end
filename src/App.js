@@ -2,11 +2,13 @@ import jwt from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
+import "./App.css";
 import ShareBnbApi from './Api';
 import UserContext from "./UserContext";
 
 import Routes from './Routes';
 import Navbar from './Navbar';
+
 
 const LOCAL_STORAGE_TOKEN_KEY = "token";
 
