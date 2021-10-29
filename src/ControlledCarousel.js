@@ -22,18 +22,20 @@ function ControlledCarousel({ photoUrls }) {
   };
 
   return (
-    <Carousel fade activeIndex={currCardIdx} onSelect={handleSelect} className="w-75">
-      {photoUrls.map(photo => (
-        <Carousel.Item key={photo}>
-          <img
-            className="d-block w-100"
-            src={photo}
-            alt="listing"
-          />
-        </Carousel.Item>
-      ))}
+    <div className="container w-75">
+      <Carousel fade activeIndex={currCardIdx} onSelect={handleSelect}>
+        {photoUrls.map(photo => (
+          <Carousel.Item key={photo}>
+            <img
+              className="d-block w-100"
+              src={photo}
+              alt="listing"
+            />
+          </Carousel.Item>
+        ))}
 
-    </Carousel>
+      </Carousel>
+    </div>
   );
 }
 
