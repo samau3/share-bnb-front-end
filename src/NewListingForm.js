@@ -3,11 +3,6 @@ import { Redirect } from "react-router-dom";
 
 import ShareBnbApi from "./Api";
 import Alert from "./Alert";
-// import UserContext from "../auth/UserContext";
-// import "./ProfileForm.css"
-
-// eslint-disable-next-line
-// import useTimedMessage from "../hooks/useTimedMessage";
 
 const INITIAL_FORM_DATA = {
   name: "",
@@ -16,9 +11,7 @@ const INITIAL_FORM_DATA = {
   state: "",
   country: "",
   description: "",
-  photoUrl1: "",
-  photoUrl2: "",
-  photoUrl3: "",
+  photoUrls: "",
   price: 0,
 }
 
@@ -51,12 +44,10 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
   /** Handle form data changing */
   function handleChange(evt) {
     const { name, value } = evt.target;
-
     setFormData(f => ({
       ...f,
       [name]: value,
     }));
-    // console.log("NewListingForm handlechange", { formData })
     setFormErrors([]);
   }
 
@@ -64,13 +55,10 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
     evt.preventDefault();
     // Append allows you to add the same key with a different value
     const data = new FormData();
-    console.log({images});
+
     for (let image of images) {
       data.append('file', image); // {file: image}, {file, image}, {file, image}
     }
-    // data.set('files', images); // {files: [File, File, File]}
-    console.log({data});
-    console.log('handleSubmit data', data.get('file'))
 
     // looping through the formData to update data with the
     // key, value pairs (ex. name: name)
@@ -81,7 +69,6 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
     try {
       await ShareBnbApi.uploadNewListing(data);
       setFormSubmitted(true);
-
     } catch (err) {
       console.log(err);
       setFormErrors(err);
@@ -89,9 +76,6 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
   }
 
   function handlePhoto(evt) {
-    // need to make a callback to adding more photos doesn't override existing uploaded state
-    // also need to spread curr state array
-    // setImages(curr => [...curr, evt.target.files[0]]);
     setImages(evt.target.files);
   }
 
@@ -109,7 +93,7 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
               <label htmlFor="photoInput" className="form-label">Photo (max 3)</label>
               <input
                 id="photoInput"
-                name="photoUrl1"
+                name="photoUrls"
                 type="file"
                 accept="image/*"
                 className="form-control"

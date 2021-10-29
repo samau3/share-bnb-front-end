@@ -1,6 +1,3 @@
-// import ShareBnbApi from "./Api";
-// import { useEffect, useState } from "react";
-
 /** Shows featured listings 
  * 
  *  Props:
@@ -28,9 +25,6 @@ function FeatureListing({ listing }) {
                 {listing.photoUrls[0] && <img src={listing.photoUrls[0]}
                     alt={listing.name}
                     className="float-end ms-5 mb-3 col" />}
-                {/* <div className="col-10">
-                <p className="text-left"><small>{description}</small></p>
-            </div> */}
             </div>
         </div>
     )
