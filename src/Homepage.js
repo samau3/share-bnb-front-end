@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import ShareBnbApi from "./Api";
 import FeaturedListing from "./FeaturedListing";
-// import SearchForm from "./SearchForm";
 
 
 /** Component for homepage
@@ -21,9 +20,10 @@ import FeaturedListing from "./FeaturedListing";
  * 
  *  Routes -> Homepage -> FeatureListing
  */
-
+// TODO: update featureIds to prop
+// TODO: Add feature to welcome currentUser
 function Homepage() {
-    const [featureIds, setFeatureIds] = useState([6, 8]);
+    const [featureIds, setFeatureIds] = useState([11, 8]);
     const [featuredListings, setFeaturedListings] = useState([]);
     const [needsLoading, setNeedsLoading] = useState(true);
 
@@ -46,7 +46,6 @@ function Homepage() {
             <div className="jumbotron">
                 <h1 className="Homepage-header mb-4 fw-bold display-1">Share BnB</h1>
                 <p className="lead">Find a private outdoor space.</p>
-                {/* <SearchForm searchFor={searchFor} /> */}
                 {/* {currentUser &&
                 <h2>Welcome {currentUser.firstName} {currentUser.lastName}!</h2>
             } */}

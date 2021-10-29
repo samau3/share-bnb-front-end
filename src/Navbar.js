@@ -13,6 +13,9 @@ import UserContext from "./UserContext";
  *  Events:
  *  - None
  * 
+ *  Context:
+ *  - currentUser { username, firstName, lastName, email, isAdmin }
+ * 
  *  App -> Navbar
  * 
  */

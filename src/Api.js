@@ -52,6 +52,7 @@ class ShareBnbApi {
     *  Returns new listing:
     *  { id, name, street, city, state, country, description, photoUrls }
     */
+    // TODO: Refactor to use this.request (headers should not need to be added)
     static async uploadNewListing(data) {
         const result = await axios.post(`${BASE_URL}/listings/`, data, {
             headers: {

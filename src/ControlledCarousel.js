@@ -16,7 +16,7 @@ import Carousel from 'react-bootstrap/Carousel'
 function ControlledCarousel({ photoUrls }) {
 
   const [currCardIdx, setCardIdx] = useState(0);
-
+  // TODO: Update to named function
   const handleSelect = (selectedIndex, e) => {
     setCardIdx(selectedIndex);
   };
