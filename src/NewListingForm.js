@@ -91,7 +91,8 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
   function handlePhoto(evt) {
     // need to make a callback to adding more photos doesn't override existing uploaded state
     // also need to spread curr state array
-    setImages(curr => [...curr, evt.target.files[0]]);
+    // setImages(curr => [...curr, evt.target.files[0]]);
+    setImages(evt.target.files);
   }
 
   if (formSubmitted) {
@@ -105,7 +106,7 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
         <div className="card-body">
           <form method="POST" onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="mb-3">
-              <label htmlFor="photoInput" className="form-label">Photo</label>
+              <label htmlFor="photoInput" className="form-label">Photo (max 3)</label>
               <input
                 id="photoInput"
                 name="photoUrl1"
@@ -114,28 +115,9 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
                 className="form-control"
                 placeholder="Add a Photo"
                 onChange={handlePhoto}
+                multiple
+                required
               />
-              <label htmlFor="photoInput" className="form-label">Photo</label>
-              <input
-                id="photoInput"
-                name="photoUrl2"
-                type="file"
-                accept="image/*"
-                className="form-control"
-                placeholder="Add a Photo"
-                onChange={handlePhoto}
-              />
-              <label htmlFor="photoInput" className="form-label">Photo</label>
-              <input
-                id="photoInput"
-                name="photoUrl3"
-                type="file"
-                accept="image/*"
-                className="form-control"
-                placeholder="Add a Photo"
-                onChange={handlePhoto}
-              />
-
             </div>
             <div className="mb-3">
               <label className="form-label">Name</label>
