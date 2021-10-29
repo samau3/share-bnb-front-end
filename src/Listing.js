@@ -23,14 +23,15 @@ function Listing() {
     }, [id]);
 
     if (!listing) return <h1>Loading...</h1>;
-
+    console.log({listing});
     return (
       <div id={id} className="Listing">
         <h4 className="Listing">{listing.name}</h4>
         <span className="Listing">{listing.city}, {listing.state}, {listing.country}</span>
         <p className="Listing">${listing.price}</p>
         <p className="Listing mx-5">{listing.description}</p>
-        {listing.photoUrl && <img className="Listing w-75" src={listing.photoUrl} alt="listing" />}
+        {listing.photoUrls.map(photo => (
+          <img className="Listing w-75 mb-2" src={photo} alt="listing" key={photo}/>))}
       </div>
     );
 }

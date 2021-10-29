@@ -25,7 +25,7 @@ function FeatureListing({ listing }) {
                 </small>
             </p>
             <div className="row">
-                {listing.photoUrl && <img src={listing.photoUrl}
+                {listing.photoUrls[0] && <img src={listing.photoUrls[0]}
                     alt={listing.name}
                     className="float-end ms-5 mb-3 col" />}
                 {/* <div className="col-10">

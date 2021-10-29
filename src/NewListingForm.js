@@ -16,7 +16,9 @@ const INITIAL_FORM_DATA = {
   state: "",
   country: "",
   description: "",
-  photoUrl: "",
+  photoUrl1: "",
+  photoUrl2: "",
+  photoUrl3: "",
   price: 0,
 }
 
@@ -36,10 +38,10 @@ const INITIAL_FORM_DATA = {
 
 function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
   const [formData, setFormData] = useState(initalFormData);
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
   const [formErrors, setFormErrors] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  console.log("NewListingForm", { formData, image, formErrors })
+  console.log("NewListingForm", { formData, images, formErrors })
 
   useEffect(function resetFormSubmitted() {
     setFormSubmitted(false);
@@ -60,10 +62,15 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    // Append allows you to add the same key with a different value
     const data = new FormData();
-
-    data.append('file', image);
-    // console.log('handleSubmit data', data.get('file'))
+    console.log({images});
+    for (let image of images) {
+      data.append('file', image); // {file: image}, {file, image}, {file, image}
+    }
+    // data.set('files', images); // {files: [File, File, File]}
+    console.log({data});
+    console.log('handleSubmit data', data.get('file'))
 
     // looping through the formData to update data with the
     // key, value pairs (ex. name: name)
@@ -84,7 +91,7 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
   function handlePhoto(evt) {
     // need to make a callback to adding more photos doesn't override existing uploaded state
     // also need to spread curr state array
-    setImage(evt.target.files[0]);
+    setImages(curr => [...curr, evt.target.files[0]]);
   }
 
   if (formSubmitted) {
@@ -101,13 +108,34 @@ function NewListingForm({ initalFormData = INITIAL_FORM_DATA }) {
               <label htmlFor="photoInput" className="form-label">Photo</label>
               <input
                 id="photoInput"
-                name="photoUrl"
+                name="photoUrl1"
                 type="file"
                 accept="image/*"
                 className="form-control"
                 placeholder="Add a Photo"
                 onChange={handlePhoto}
               />
+              <label htmlFor="photoInput" className="form-label">Photo</label>
+              <input
+                id="photoInput"
+                name="photoUrl2"
+                type="file"
+                accept="image/*"
+                className="form-control"
+                placeholder="Add a Photo"
+                onChange={handlePhoto}
+              />
+              <label htmlFor="photoInput" className="form-label">Photo</label>
+              <input
+                id="photoInput"
+                name="photoUrl3"
+                type="file"
+                accept="image/*"
+                className="form-control"
+                placeholder="Add a Photo"
+                onChange={handlePhoto}
+              />
+
             </div>
             <div className="mb-3">
               <label className="form-label">Name</label>

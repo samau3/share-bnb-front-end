@@ -44,7 +44,7 @@ function Listings() {
                                 city={l.city}
                                 state={l.state}
                                 country={l.country}
-                                photoUrl={l.photoUrl}
+                                photoUrls={l.photoUrls}
                             />
                         ))}
                     </div>

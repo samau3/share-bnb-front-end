@@ -14,8 +14,8 @@ import { Link } from "react-router-dom";
  * Listings -> ListingCard
  */
 
-function ListingCard({ name, city, state, country, photoUrl, id }) {
-    console.debug("ListingCard", photoUrl);
+function ListingCard({ name, city, state, country, photoUrls, id }) {
+    console.debug("ListingCard", photoUrls);
 
     return (
         <Link className="ListingCard card mb-1 col-xl-5 mx-1" to={`/listings/${id}`}>
@@ -25,7 +25,8 @@ function ListingCard({ name, city, state, country, photoUrl, id }) {
                 </h5>
                 <p className="text-center"><small>{city} {state}, {country}</small></p>
                 <div className="row">
-                    {photoUrl && <img src={photoUrl}
+                    {photoUrls && 
+                        <img src={photoUrls[0]}
                         alt={name}
                         className="float-end ms-5 mb-3 col" />}
                 </div>
