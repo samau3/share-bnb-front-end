@@ -16,6 +16,9 @@ import UserContext from "./UserContext";
  *  State:
  *  - None
  * 
+ *  Events:
+ *  - None
+ * 
  *  Routes -> Private Route -> { Redirect, children }
  */
 
