@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import ShareBnbApi from "./Api";
-import FeatureListing from "./FeatureListing";
+import FeaturedListing from "./FeaturedListing";
 // import SearchForm from "./SearchForm";
 
 
@@ -15,6 +15,9 @@ import FeatureListing from "./FeatureListing";
  *  - featureIds: an array of ids for the featured listing section [3, 8]
  *  - featuredListings: an array of listings from the featured listing
  *  - needsLoading: true/false
+ *  
+ *  Events:
+ *  - None
  * 
  *  Routes -> Homepage -> FeatureListing
  */
@@ -24,6 +27,7 @@ function Homepage() {
     const [featuredListings, setFeaturedListings] = useState([]);
     const [needsLoading, setNeedsLoading] = useState(true);
 
+    /** Gets two listings from database and store in featuredListings */
     useEffect(function getFeatureListingOnMount() {
         async function getFeatureListing() {
             const listings = await Promise.all(featureIds.map(async (id) => {
@@ -54,7 +58,7 @@ function Homepage() {
                     return (
                         <div className="col" key={l.id}>
                             <Link to={listingTo}>
-                                <FeatureListing
+                                <FeaturedListing
                                     listing={l}
                                 />
                             </Link>

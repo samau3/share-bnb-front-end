@@ -68,7 +68,7 @@ class ShareBnbApi {
         return result.token;
     }
 
-    /** Takes in data from the login form returns a token if the inputs match
+    /** Takes in data from the login form and returns a token if the inputs match
     *   the user's data
     */
     static async login(loginData) {

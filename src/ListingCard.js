@@ -2,13 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-/** Show limited information about a listing
+/** Show basic information about a listing
  *
  *  Props: 
- *  - id, name, city, state, country, description, photoUrl
+ *  - id, name, city, state, country, photoUrl
  *  - Information about a single listing
  * 
  *  State:
+ *  - None
+ * 
+ *  Events:
  *  - None
  *
  *  Listings -> ListingCard

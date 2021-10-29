@@ -18,6 +18,9 @@ import SignUpForm from "./SignUpForm";
  *  State:
  *  - None
  * 
+ *  Events:
+ *  - None
+ * 
  *  App -> Routes 
  *          -> { Homepage, LoginForm, SignUpForm }
  *          -> Private Routes -> { Listing, Listings, NewListingForm }

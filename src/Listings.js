@@ -19,12 +19,18 @@ import ListingCard from "./ListingCard";
  *  - listings: an array of listings
  *      [ { id, name, street, city, state, country, description, photoUrls, price },...]
  * 
+ *  Events:
+ *  - None
+ * 
  *  Routes -> Listings -> { SearchForm, ListingCard }
  */
 
 function Listings() {
     const [listings, setListings] = useState(null);
 
+    /** Submits a search with no queries on first load to get all database
+     *  listings
+     */
     useEffect(function getListingsOnMount() {
         search();
     }, []);

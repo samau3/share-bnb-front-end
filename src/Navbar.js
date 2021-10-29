@@ -10,6 +10,9 @@ import UserContext from "./UserContext";
  *  State:
  *  - None
  * 
+ *  Events:
+ *  - None
+ * 
  *  App -> Navbar
  * 
  */

@@ -23,6 +23,11 @@ const INITIAL_SIGNUP_FORM = {
  *  - formData: form inputs
  *  - formErrors: error messages from submitting form
  *
+ *  Events:
+ *  - handleChange: changes in form input fields
+ *  - handleSubmit: calls handleSignUp with formData as argument
+ * 
+ * 
  *  Routes -> SignupForm -> Alert
  */
 

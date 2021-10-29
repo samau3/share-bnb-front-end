@@ -19,10 +19,13 @@ const LOCAL_STORAGE_TOKEN_KEY = "token";
  * 
  *  State:
  *  - needsInfo: true/false
- *  - currentUser: { username, firstName, lastName, email, isAdmin }
- *  - token: string returned from the server/local storage
  *  - needsRedirect: true/false
+ *  - token: string returned from the server/local storage
+ *  - currentUser: { username, firstName, lastName, email, isAdmin }
  *
+ *  Events:
+ *  - None
+ * 
  * App -> { Routes, Navbar }
  */
 
@@ -40,6 +43,8 @@ function App() {
     "needsRedirect=", needsRedirect,
   );
 
+
+  /** Updates website for user info whenever token changes */
   useEffect(function loadUserInfo() {
     async function getCurrentUser() {
       if (token) {
@@ -88,7 +93,7 @@ function App() {
 
   /** Handles site-wide logout. 
    * 
-   *  sets currentUser and token to null and removes the token
+   *  Sets currentUser and token to null and removes the token
    *  from localStorage.
   */
   function handleLogout() {

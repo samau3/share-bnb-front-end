@@ -25,12 +25,16 @@ const INITIAL_LOGIN_FORM = {
  *  - formData: inputs from the form
  *  - formErrors: error messages from form submission
  * 
+ *  Events:
+ *  - handleChange: changes in form input fields
+ *  - handleSubmit: calls handleLogin when form is submitted
+ * 
  *  Routes -> LoginForm -> Alert
  */
 
 function LoginForm({ handleLogin }) {
-  const [formErrors, setFormErrors] = useState([]);
   const [formData, setFormData] = useState(INITIAL_LOGIN_FORM);
+  const [formErrors, setFormErrors] = useState([]);
   const currentUser = useContext(UserContext);
 
   if (currentUser) return <Redirect to="/" />

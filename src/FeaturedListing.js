@@ -7,11 +7,14 @@
  *  State:
  *  - None
  * 
+ *  Events:
+ *  - None
+ * 
  *  Homepage -> FeatureListing
  * 
  */
 
-function FeatureListing({ listing }) {
+function FeaturedListing({ listing }) {
     return (
         <div className="card-body text-decoration-none">
             <h5 className="card-title text-center">
@@ -31,4 +34,4 @@ function FeatureListing({ listing }) {
     )
 }
 
-export default FeatureListing;
+export default FeaturedListing;

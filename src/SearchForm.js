@@ -22,6 +22,10 @@ const INITIAL_SEARCH_FORM = {
  *  - searchTerms: possible criteria to search for
  *   { name, city, state, country }
  *
+ *  Events:
+ *  - handleChange: changes in search form input fields
+ *  - handleSubmit: calls searchFor function with searchTerms argument
+ * 
  *  Listing -> SearchForm
  */
 

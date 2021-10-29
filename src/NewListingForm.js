@@ -26,6 +26,12 @@ const INITIAL_NEW_LISTING_FORM = {
  *  - formSubmitted: true/false
  *  - images: an array of photos uploaded by the user
  *
+ *  Events:
+ *  - handleChange: changes in form input fields
+ *  - handleSubmit: sends form data to API to update database and 
+ *                  updates formSubmitted state
+ *  - handlePhoto: updates images state with uploaded photos
+ * 
  *  Routes -> NewListingForm -> Alert
  */
 
@@ -36,6 +42,7 @@ function NewListingForm() {
   const [images, setImages] = useState([]);
   console.log("NewListingForm", { formData, images, formErrors })
 
+  /** Resets form submitted state when component mounts */
   useEffect(function resetFormSubmitted() {
     setFormSubmitted(false);
   }, []);

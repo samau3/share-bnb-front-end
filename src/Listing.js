@@ -13,6 +13,9 @@ import ShareBnbApi from "./Api";
  *  State:
  *  - listing: information about a single listing
  *
+ *  Events:
+ *  - None
+ * 
  *  Routes -> Listing
  */
 
@@ -20,6 +23,7 @@ function Listing() {
   const { id } = useParams();
   const [listing, setListing] = useState(null);
 
+  /** Gets single listing's information from database and stores in listing state */
   useEffect(function getListingDetail() {
     async function getListingFromApi() {
       setListing(await ShareBnbApi.getListing(id));
