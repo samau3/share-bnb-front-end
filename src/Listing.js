@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import ControlledCarousel from "./ControlledCarousel";
-import ShareBnbApi from "./Api";
 
+import ShareBnbApi from "./Api";
+import UserContext from "./UserContext";
 
 /** Listing Detail page. Renders information about listing.
  *  Routed at /listings/:id
@@ -21,6 +22,7 @@ import ShareBnbApi from "./Api";
 
 function Listing() {
   const { id } = useParams();
+  const currentUser = useContext(UserContext);
   const [listing, setListing] = useState(null);
   const [needsRedirect, setNeedsRedirect] = useState(false);
 
@@ -49,11 +51,13 @@ function Listing() {
       <p className="Listing">${listing.price}</p>
       <p className="Listing mx-5">{listing.description}</p>
       <ControlledCarousel photoUrls={listing.photoUrls} />
-      <button className="Listing btn btn-sm btn-primary mt-4" onClick={handleDelete}>Delete Listing</button>
-    </div >
+      {currentUser.username === listing.username | currentUser.isAdmin
+        ? <button className="Listing btn btn-sm btn-primary mt-4" onClick={handleDelete}>
+          Delete Listing
+        </button>
+        : null}
+    </div>
   );
-
-
 }
 
 export default Listing;

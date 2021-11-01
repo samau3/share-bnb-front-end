@@ -34,7 +34,6 @@ function ControlledCarousel({ photoUrls }) {
             />
           </Carousel.Item>
         ))}
-
       </Carousel>
     </div>
   );
