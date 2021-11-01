@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ShareBnbApi from "./Api";
 import FeaturedListing from "./FeaturedListing";
 
+const DEFAULT_FEATURE_IDS = [11, 8];
 
 /** Component for homepage
  * 
@@ -20,10 +21,7 @@ import FeaturedListing from "./FeaturedListing";
  * 
  *  Routes -> Homepage -> FeatureListing
  */
-// TODO: update featureIds to prop
-// TODO: Add feature to welcome currentUser
-function Homepage() {
-    const [featureIds, setFeatureIds] = useState([11, 8]);
+function Homepage({ featureIds = DEFAULT_FEATURE_IDS }) {
     const [featuredListings, setFeaturedListings] = useState([]);
     const [needsLoading, setNeedsLoading] = useState(true);
 
@@ -46,9 +44,6 @@ function Homepage() {
             <div className="jumbotron">
                 <h1 className="Homepage-header mb-4 fw-bold display-1">Share BnB</h1>
                 <p className="lead">Find a private outdoor space.</p>
-                {/* {currentUser &&
-                <h2>Welcome {currentUser.firstName} {currentUser.lastName}!</h2>
-            } */}
             </div>
             <h3>FEATURED LISTINGS</h3>
             <div className="row">
