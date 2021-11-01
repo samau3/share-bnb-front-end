@@ -34,6 +34,7 @@ function Listing() {
     getListingFromApi();
   }, [id]);
 
+  /** deletes listing when button is clicked  */
   async function handleDelete() {
     const result = await ShareBnbApi.deleteListing(id);
     console.log({ result });
