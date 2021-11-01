@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import ControlledCarousel from "./ControlledCarousel";
 import ShareBnbApi from "./Api";
 
@@ -22,6 +22,7 @@ import ShareBnbApi from "./Api";
 function Listing() {
   const { id } = useParams();
   const [listing, setListing] = useState(null);
+  const [needsRedirect, setNeedsRedirect] = useState(false);
 
   /** Gets single listing's information from database and stores in listing state */
   useEffect(function getListingDetail() {
@@ -31,7 +32,15 @@ function Listing() {
     getListingFromApi();
   }, [id]);
 
+  async function handleDelete() {
+    const result = await ShareBnbApi.deleteListing(id);
+    console.log({ result });
+    setNeedsRedirect(true);
+  }
+
   if (!listing) return <h1>Loading...</h1>;
+
+  if (needsRedirect) return <Redirect to="/listings" />
 
   return (
     <div id={id} className="Listing mb-5">
@@ -40,8 +49,7 @@ function Listing() {
       <p className="Listing">${listing.price}</p>
       <p className="Listing mx-5">{listing.description}</p>
       <ControlledCarousel photoUrls={listing.photoUrls} />
-      {/* {listing.photoUrls.map(photo => (
-        <img className="Listing w-75 mb-2" src={photo} alt="listing" key={photo} />))} */}
+      <button className="Listing btn btn-sm btn-primary mt-4" onClick={handleDelete}>Delete Listing</button>
     </div >
   );
 

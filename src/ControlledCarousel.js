@@ -17,9 +17,15 @@ function ControlledCarousel({ photoUrls }) {
 
   const [currCardIdx, setCardIdx] = useState(0);
   // TODO: Update to named function
-  const handleSelect = (selectedIndex, e) => {
+
+  function handleSelect(selectedIndex, e) {
     setCardIdx(selectedIndex);
-  };
+  }
+  // const handleSelect = (selectedIndex, e) => {
+  //   setCardIdx(selectedIndex);
+  // };
+
+
 
   return (
     <div className="container w-75">

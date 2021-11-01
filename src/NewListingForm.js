@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import ShareBnbApi from "./Api";
 import Alert from "./Alert";
 
-const INITIAL_NEW_LISTING_FORM = {
-  name: "",
-  street: "",
-  city: "",
-  state: "",
-  country: "",
-  description: "",
-  photoUrls: "",
-  price: 0,
-}
+import UserContext from "./UserContext";
+
+
 
 /** Create a new listing.
  *
@@ -36,11 +29,27 @@ const INITIAL_NEW_LISTING_FORM = {
  */
 
 function NewListingForm() {
+  const currentUser = useContext(UserContext);
+
+  const INITIAL_NEW_LISTING_FORM = {
+    name: "",
+    street: "",
+    city: "",
+    state: "",
+    country: "",
+    description: "",
+    photoUrls: "",
+    price: 0,
+    username: currentUser.username,
+  }
+
   const [formData, setFormData] = useState(INITIAL_NEW_LISTING_FORM);
   const [formErrors, setFormErrors] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [images, setImages] = useState([]);
-  console.log("NewListingForm", { formData, images, formErrors })
+  console.log("NewListingForm", { formData, images, formErrors, currentUser })
+
+
 
   /** Resets form submitted state when component mounts */
   useEffect(function resetFormSubmitted() {
@@ -177,6 +186,15 @@ function NewListingForm() {
                 value={formData.price}
                 onChange={handleChange}
                 required
+              />
+            </div>
+            <div className="">
+              <input
+                name="username"
+                className=""
+                value={currentUser.username}
+                onChange={handleChange}
+                hidden
               />
             </div>
 
