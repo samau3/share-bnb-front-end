@@ -26,7 +26,7 @@ function Navbar({ handleLogout }) {
         <nav className="Navigation navbar navbar-expand-md">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
-                    ShareBnB
+                    Share B&B
                 </Link>
                 {currentUser && <ul className="navbar-nav ms-auto">
                     <li className="nav-item me-4">

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import ShareBnbApi from "./Api";
 import FeaturedListing from "./FeaturedListing";
 
+import logo from "./logo.svg";
+
 const DEFAULT_FEATURE_IDS = [11, 8];
 
 /** Component for homepage
@@ -42,8 +44,9 @@ function Homepage({ featureIds = DEFAULT_FEATURE_IDS }) {
     return (
         <div className="Homepage container text-center mt-5">
             <div className="jumbotron">
-                <h1 className="Homepage-header mb-4 fw-bold display-1">Share BnB</h1>
-                <p className="lead">Find a private outdoor space.</p>
+                <img src={logo} alt="sharebnb logo" className="w-50"/> 
+                {/* <h1 className="Homepage-header mb-4 fw-bold display-1">Share BnB</h1> */}
+                {/* <p className="lead">Find a private outdoor space.</p> */}
             </div>
             <h3>FEATURED LISTINGS</h3>
             <div className="row">

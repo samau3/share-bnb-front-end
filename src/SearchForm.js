@@ -5,8 +5,8 @@ const INITIAL_SEARCH_FORM = {
   city: "",
   state: "",
   country: "",
-  minPrice: 0,
-  maxPrice: 0,
+  minPrice: "",
+  maxPrice: "",
 }
 
 /** Search form.
@@ -86,14 +86,14 @@ function SearchForm({ searchFor }) {
           <input
             className="form-control form-control-sm bg-white mb-1"
             name="minPrice"
-            placeholder="Search for Listings with Minimum Price"
+            placeholder="Minimum Price"
             value={searchTerms.minPrice}
             onChange={handleChange}
           />
           <input
             className="form-control form-control-sm bg-white mb-1"
             name="maxPrice"
-            placeholder="Search for Listings with Maximum Price"
+            placeholder="Maximum Price"
             value={searchTerms.maxPrice}
             onChange={handleChange}
           />

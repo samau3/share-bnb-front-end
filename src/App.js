@@ -35,14 +35,13 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY));
   const [currentUser, setCurrentUser] = useState(null);
 
-  console.debug(
-    "App",
-    "needsInfo=", needsInfo,
-    "currentUser=", currentUser,
-    "token=", token,
-    "needsRedirect=", needsRedirect,
-  );
-
+  // console.debug(
+  //   "App",
+  //   "needsInfo=", needsInfo,
+  //   "currentUser=", currentUser,
+  //   "token=", token,
+  //   "needsRedirect=", needsRedirect,
+  // );
 
   /** Updates website for user info whenever token changes */
   useEffect(function loadUserInfo() {

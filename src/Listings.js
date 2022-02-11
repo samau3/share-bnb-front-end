@@ -4,7 +4,6 @@ import ShareBnbApi from "./Api";
 import SearchForm from "./SearchForm";
 import ListingCard from "./ListingCard";
 
-
 /** Show page with list of listings.
  *
  *  On mount, loads listings from API.
@@ -64,6 +63,7 @@ function Listings() {
                 ) : (
                     <p className="lead">Sorry, no results were found!</p>
                 )}
+
         </div>
     );
 }
