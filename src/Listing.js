@@ -54,7 +54,7 @@ function Listing() {
         <p className="Listing">{listing.description}</p>
       </div>
       <ControlledCarousel photoUrls={listing.photoUrls} />
-      {currentUser.username === listing.username | currentUser.isAdmin
+      {currentUser && currentUser.username === listing.username | currentUser.isAdmin
         ? <button className="Listing btn btn-sm btn-primary mt-4" onClick={handleDelete}>
           Delete Listing
         </button>
