@@ -40,13 +40,13 @@ function Routes({ handleLogin, handleSignUp }) {
                 <SignUpForm handleSignUp={handleSignUp} />
             </Route>
 
-            <Route exact path="/listings">
+            <PrivateRoute exact path="/listings">
                 <Listings />
-            </Route>
+            </PrivateRoute>
 
-            <Route exact path="/listings/:id">
+            <PrivateRoute exact path="/listings/:id">
                 <Listing />
-            </Route>
+            </PrivateRoute>
 
             <PrivateRoute exact path="/addListing">
                 <NewListingForm />
